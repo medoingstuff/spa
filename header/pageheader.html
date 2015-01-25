@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//<?php echo strtoupper($lang); ?>" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+
+<!-- TITLE -->
+<title><?php echo $pagename." - ".$pagesitename; ?></title>
+
+<!-- FAVICON -->
+<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+<link rel="SHORTCUT ICON" href='favicon.ico' type='image/x-icon' />
+
+<!-- META -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- ALLOWS border-radius to work in IE -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="<?php echo $meta_description; ?>" />
+<meta name='keywords' content="<?php echo $meta_keywords; ?>" />
+<META NAME="robots" CONTENT="index, follow" />
+<META NAME="googlebot" CONTENT="index,follow" />
+<meta name="Author" content="50th Street Massage Centre" />
+
+<?php 
+//if ($user_loggedin && $user_auth) {
+//	echo '<meta name="viewport" content="width=1000" />';
+//} else {
+//	echo '<meta name="viewport" content="width=600" />';	
+//}
+?>
+<meta name="viewport" content="width=1500" />
+
+<!-- FACEBOOK -->
+<meta property="og:title" content="<?php echo $pagename; ?>" />
+<meta property="og:type" content="website" />		
+<meta property="og:url" content="http://50streetmassage.com<?php echo $_SERVER['REQUEST_URI']; ?>" />
+<meta property="og:image" content="<?php echo $social_image; ?>" />
+<meta property="og:site_name" content="50th Street Massage Centre" />
+<meta property="og:description" content="<?php echo $meta_description; ?>" />
+<meta property="fb:app_id" content='' />
+<meta property="fb:admins" content="" />
+
+<!-- TWITTER -->
+<meta name="twitter:card" content="<?php echo $twittercardmeta; ?>">
+<meta name="twitter:image" content="<?php echo $social_image; ?>">
+<meta name="twitter:url" content="http://50streetmassage.com<?php echo $_SERVER['REQUEST_URI']; ?>">
+<meta name="twitter:title" content="<?php echo $pagename; ?>">
+<meta name="twitter:description" content="<?php echo $meta_description; ?>">	
+
+
+<!-- CSS -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+
+<link rel='stylesheet' type='text/css' media='screen,print' href='galleryfiles/gallery.css' />
+<link rel='stylesheet' type='text/css' media='screen,print' href='styles.css' />
+
+
+<!-- JQUERY -->
+<!--
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js" charset="utf-8"></script>
+
+<!-- include Cycle plugin -->
+<script src="js/jquery.cycle2.min.js"></script>
+<script src="js/jquery.cycle2.swipe.min.js"></script>
+<script src="js/jquery.cycle2.scrollVert.min.js"></script>
+
+<!-- include JSON plugin -->
+<script src="js/jquery.json-2.3.min.js"></script>
+
+<!-- flex slider jquery plugin -->
+<link rel="stylesheet" href="js/flexslider/flexslider.css" type="text/css">
+<script src="js/flexslider/jquery.flexslider-min.js"></script>
+
+<!-- jQuery Lightbox -->
+<script type="text/javascript" src="js/jquery.lightbox-0.5.min.js"></script>
+
+<!-- all other scripts -->
+<script type="text/javascript" src='js/spa.js'></script>
+<script type="text/javascript" src="click_to_edit.js"></script>
+
+<!-- <script type="text/javascript" src="js/events.js"></script> -->
+<script type="text/javascript" src="js/htmlentities.js"></script>
+<script  type="text/javascript" src="js/ajaxlinx.js"></script>
+<script type="text/javascript" src="js/jfunctions.js"></script>
+
+<!-- gallery scripts -->
+<script type="text/javascript" src="galleryfiles/js_googlemaps.js"></script>
+<script type="text/javascript" src="js/events.js"></script>
+<script type="text/javascript" src="galleryfiles/gallery.js"></script>
+<!-- <script type="text/javascript" src="galleryfiles/alertkey.js"></script>                 -->
+
+
+<script src="ckeditor/ckeditor.js"></script>
+<script>
+	// This code is generally not necessary, but it is here to demonstrate
+	// how to customize specific editor instances on the fly. This fits well
+	// this demo because we have editable elements (like headers) that
+	// require less features.
+
+	// The "instanceCreated" event is fired for every editor instance created.
+	CKEDITOR.on( 'instanceCreated', function( event ) {
+		var editor = event.editor,
+			element = editor.element;
+
+		// Customize editors for headers and tag list.
+		// These editors don't need features like smileys, templates, iframes etc.
+		if ( element.is( 'h1', 'h2', 'h3' ) || element.getAttribute( 'id' ) == 'taglist' ) {	//LIMITED EDITOR
+			// Customize the editor configurations on "configLoaded" event,
+			// which is fired after the configuration file loading and
+			// execution. This makes it possible to change the
+			// configurations before the editor initialization takes place.
+			editor.on( 'configLoaded', function() {
+
+				// Remove unnecessary plugins to make the editor simpler.
+				editor.config.removePlugins = 'colorbutton,find,flash,font,' +
+					'forms,iframe,image,newpage,removeformat,' +
+					'smiley,specialchar,stylescombo,templates';
+				editor.config.floatSpacePinnedOffsetY = 10;
+				editor.config.floatSpaceDockedOffsetY = 10;
+				editor.config.floatSpaceDockedOffsetX = 10;
+				// Rearrange the layout of the toolbar.
+				editor.config.toolbarGroups = [
+					{ name: 'editing',		groups: [ 'basicstyles', 'links' ] },
+					{ name: 'undo' },
+					{ name: 'clipboard',	groups: [ 'selection', 'clipboard' ] },
+					{ name: 'about' }
+				];
+			});
+		} else if ( element.getAttribute( 'class' ) == 'aboutemployee' ) {
+			editor.on( 'configLoaded', function() {
+				// Remove unnecessary plugins to make the editor simpler.
+				editor.config.removePlugins = 'colorbutton,find,flash,font,' +
+					'forms,iframe,image,newpage,removeformat,' +
+					'smiley,specialchar,stylescombo,templates';
+				editor.config.floatSpacePinnedOffsetY = 15;
+				editor.config.floatSpaceDockedOffsetY = 15;
+				editor.config.floatSpaceDockedOffsetX = 15;
+				// Rearrange the layout of the toolbar.
+				editor.config.toolbarGroups = [
+					{ name: 'editing',		groups: [ 'basicstyles', 'links' ] },
+					{ name: 'undo' },
+					{ name: 'clipboard',	groups: [ 'selection', 'clipboard' ] },
+					{ name: 'about' }
+				];
+			});		
+		} else {																			//UNLIMITED EDITOR
+			editor.on( 'configLoaded', function() {
+				// Remove unnecessary plugins to make the editor simpler.
+				editor.config.floatSpacePinnedOffsetY = 15;
+				editor.config.floatSpaceDockedOffsetY = 15;
+				editor.config.floatSpaceDockedOffsetX = 15;
+				// Rearrange the layout of the toolbar.
+			});		
+		}
+	});
+	//CKEDITOR.disableAutoInline = true;
+	
+	
+
+CKEDitor_loaded = false;
+CKEDITOR.on('instanceReady', function(){ 
+	CKEditor_loaded = true;
+	$(".hideinitial").hide();
+}); 
+</script>
+
+<?php
+// !GP GALLERY SCRIPT
+//for the gallery_gp_run.js file
+//allow image heights to be limited by various applications (ie. recent images) with standard=220
+$gprun_max_ht = ($gprun_max_ht < 10) ? 300 : $gprun_max_ht;
+if ($gprun_fullrowsonly === true) { //this IF statement can be deleted anytime.
+	$gprun_fullrowsonly_str = 'true';
+} else {
+	$gprun_fullrowsonly_str = 'false';
+}
+$gp_IDselectors = "[\"#thumbs\",\"#thumbs_recent\"]";
+?>
+<script src='galleryfiles/gallery_gp_run.js' type='text/javascript'></script>
+<script type='text/javascript'>
+//var gp_IDselectors = '#thumbs'; 	//, #thumbs_recent';
+//var gp_CLASSselectors = '.thumbs, .thumbs_recent';
+$(function () {
+	//window.addEventListener('resize', function () { 
+	$(window).resize(function() {
+		GPrun(<?php echo $gprun_max_ht.",".$gp_IDselectors; ?>); 
+	});
+	$(function () { 
+		GPrun(<?php echo $gprun_max_ht.",".$gp_IDselectors; ?>); 
+		showgallerythumbhovercaptions();
+		hidegallerythumbhovercaptions();
+	});
+});
+</script>
+
+
+<!-- GooglePlus Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+ 
+   
+</head>
+
+<?php
+	if ($girl) {
+		$schema_itemtype = "Product";
+	} else $schema_itemtype = "Website";
+?>
+
+<body id='pagebody' class='loginpageclasses'>
+
+	<div style='position: relative; width: 100%; min-width: 900px; max-width: 1600px; margin-left: auto; margin-right: auto;'>
+
+<!-- 	SPACER -->
+		<div id='top' class='pagerow' style='margin: 10px;'> <!-- total of 110px with margins-->
+			<!-- ################	PLACEHOLDER for pageheader	################	-->
+			<div class='clearall' style='clear: both; float: none; height: 40px;'></div><!-- total height 110-->
+		</div>
+		<div style='clear: both; float: none;'></div>
+<!-- 	END OF SPACER -->
+
